@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
@@ -22,6 +23,12 @@ const Body = () => {
       )
     );
   };
+
+// Shimmer ui is a modern concept where skeleton is place instead of blank pages
+  if (restaurantList.length === 0) {
+    return <Shimmer />;
+  }
+
   return (
     <div className="body">
       <div className="filter">
