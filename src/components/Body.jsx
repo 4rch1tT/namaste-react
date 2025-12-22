@@ -4,6 +4,8 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
+  const [filteredResList, setFilteredResList] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -22,32 +24,59 @@ const Body = () => {
         (res) => res
       )
     );
+
+    setFilteredResList(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
+        (res) => res
+      )
+    );
   };
 
-// Shimmer ui is a modern concept where skeleton is place instead of blank pages
+  // Shimmer ui is a modern concept where skeleton is place instead of blank pages
+  // This concept of rendering component based on conditions is known as conditional rendering
   if (restaurantList.length === 0) {
     return <Shimmer />;
   }
 
   return (
     <div className="body">
-      <div className="filter">
+      <div className="filter-container">
+        <div className="search-container">
+          <input
+            type="text"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              setFilteredResList(
+                restaurantList.filter((res) =>
+                  res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                )
+              );
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className="filter-btn"
           onClick={() => {
             const filtered = restaurantList.filter(
-              (res) => res.info.avgRating > 4
+              (res) => res.info.avgRating > 4.3
             );
             console.log(filtered);
 
-            setRestaurantList(filtered);
+            setFilteredResList(filtered);
           }}
         >
           Top rated
         </button>
       </div>
       <div className="res-container">
-        {restaurantList.map((restaurant) => (
+        {filteredResList.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant.info} />
         ))}
       </div>
