@@ -3,10 +3,14 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
+  // Whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredResList, setFilteredResList] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  // useEffect without dependency array => keep on calling useEffect whenever the component re-renders
+  // useEffect with empty dependency array => initially calls useEffect
+  // useEffect with dependency array with value inside => calls useEffect when the value changes 
   useEffect(() => {
     fetchData();
   }, []);

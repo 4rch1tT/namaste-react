@@ -11,6 +11,7 @@ const Navbar = () => {
       <div className="nav-items">
         <p>Home</p>
         <p>About Us</p>
+        <p>Contact Us</p>
         <p>Cart</p>
         <button
           className="login"
