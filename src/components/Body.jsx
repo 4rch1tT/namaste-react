@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router";
+import { RES_API } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
@@ -10,15 +12,13 @@ const Body = () => {
 
   // useEffect without dependency array => keep on calling useEffect whenever the component re-renders
   // useEffect with empty dependency array => initially calls useEffect
-  // useEffect with dependency array with value inside => calls useEffect when the value changes 
+  // useEffect with dependency array with value inside => calls useEffect when the value changes
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://corsproxy.io/https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=9.3852725&lng=76.57498559999999&carousel=true&third_party_vendor=1"
-    );
+    const data = await fetch(RES_API);
     const json = await data.json();
 
     console.log(json);
@@ -77,7 +77,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredResList.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant.info} />
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant.info} />
+          </Link>
         ))}
       </div>
     </div>

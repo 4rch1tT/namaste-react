@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
+import { Link } from "react-router";
 
 const Navbar = () => {
   const [btnName, setBtnName] = useState("Login");
@@ -9,9 +10,9 @@ const Navbar = () => {
         <img className="logo" src={LOGO_URL} />
       </div>
       <div className="nav-items">
-        <p>Home</p>
-        <p>About Us</p>
-        <p>Contact Us</p>
+        <p><Link to="/">Home</Link></p>
+        <p><Link to="/about">About Us</Link></p>
+        <p><Link to="/contact">Contact Us</Link></p>
         <p>Cart</p>
         <button
           className="login"
