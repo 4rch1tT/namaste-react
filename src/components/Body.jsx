@@ -13,22 +13,18 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=9.3852725&lng=76.57498559999999&carousel=true&third_party_vendor=1"
+      "https://corsproxy.io/https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=9.3852725&lng=76.57498559999999&carousel=true&third_party_vendor=1"
     );
     const json = await data.json();
 
     console.log(json);
 
     setRestaurantList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
-        (res) => res
-      )
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
 
     setFilteredResList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
-        (res) => res
-      )
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
