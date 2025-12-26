@@ -32,6 +32,9 @@ const Body = () => {
     );
   };
 
+  console.log(restaurantList);
+  console.log(filteredResList);
+
   // Shimmer ui is a modern concept where skeleton is place instead of blank pages
   // This concept of rendering component based on conditions is known as conditional rendering
   if (restaurantList.length === 0) {
