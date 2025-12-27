@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { RES_API } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // Whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
@@ -32,14 +33,18 @@ const Body = () => {
     );
   };
 
-  console.log(restaurantList);
-  console.log(filteredResList);
 
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false) {
+    return <h1>Looks like you are offline :( </h1>;
+  }
   // Shimmer ui is a modern concept where skeleton is place instead of blank pages
   // This concept of rendering component based on conditions is known as conditional rendering
   if (restaurantList.length === 0) {
     return <Shimmer />;
   }
+
 
   return (
     <div className="body">

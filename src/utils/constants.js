@@ -7,3 +7,5 @@ export const RES_API =
   "https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=9.3852725&lng=76.57498559999999&carousel=true&third_party_vendor=1";
 export const MENU_API =
   "https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=9.3852725&lng=76.57498559999999&restaurantId=";
+
+  // https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=9.3852725&lng=76.57498559999999&restaurantId=442425&submitAction=ENTER
