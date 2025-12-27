@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import Navbar from "./components/Navbar";
@@ -7,12 +7,16 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+// import Grocery from "./components/Grocery";
 
 // Jsx syntax -> not html but React.createElement which is converted by the transpiler(babel) in the bundler to React element(object) which is then converted to html by .render method
 
 /* React Element
  * const heading = <h1 id="heading">Namste React 🦥</h1>;
  */
+
+// This is known as lazy loading/chunking/code-splitting/dynamic-bundling/on-demand-loading used for optimizing the app. This basically bundles the code into smaller chunks and browser only display the code when needed
+const Grocery = lazy(() => import("./components/Grocery"));
 
 // React Functional Component -> a function that return React elements(JSX)
 // Component Composition -> composing 2 components together
@@ -41,6 +45,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h1>Loading....</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
       },
       {
         path: "/restaurants/:resId",
