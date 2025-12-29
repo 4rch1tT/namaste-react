@@ -33,7 +33,6 @@ const Body = () => {
     );
   };
 
-
   const onlineStatus = useOnlineStatus();
 
   if (onlineStatus === false) {
@@ -44,7 +43,6 @@ const Body = () => {
   if (restaurantList.length === 0) {
     return <Shimmer />;
   }
-
 
   return (
     <div className="body">
@@ -83,7 +81,7 @@ const Body = () => {
           Top rated
         </button>
       </div>
-      <div className="res-container">
+      <div className="p-4 m-4 flex gap-4 flex-wrap">
         {filteredResList.map((restaurant) => (
           <Link
             key={restaurant.info.id}

@@ -5,15 +5,23 @@ import { Link } from "react-router";
 const Navbar = () => {
   const [btnName, setBtnName] = useState("Login");
   return (
-    <div className="navbar">
+    <div className="flex justify-between px-4 py-2 bg-blue-50 shadow-xl">
       <div className="logo-container">
-        <img className="logo" src={LOGO_URL} />
+        <img className="w-32" src={LOGO_URL} />
       </div>
-      <div className="nav-items">
-        <p><Link to="/">Home</Link></p>
-        <p><Link to="/about">About Us</Link></p>
-        <p><Link to="/contact">Contact Us</Link></p>
-        <p><Link to="/grocery">Grocery</Link></p>
+      <div className="flex gap-5 items-center">
+        <p>
+          <Link to="/">Home</Link>
+        </p>
+        <p>
+          <Link to="/about">About Us</Link>
+        </p>
+        <p>
+          <Link to="/contact">Contact Us</Link>
+        </p>
+        <p>
+          <Link to="/grocery">Grocery</Link>
+        </p>
         <p>Cart</p>
         <button
           className="login"
