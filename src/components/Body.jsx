@@ -13,7 +13,6 @@ const Body = () => {
 
   const TopRatedRestaurantCard = withTopRatedLabel(RestaurantCard);
 
-  console.log(restaurantList);
 
   // useEffect without dependency array => keep on calling useEffect whenever the component re-renders
   // useEffect with empty dependency array => initially calls useEffect
