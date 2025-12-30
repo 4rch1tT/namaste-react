@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { RES_API } from "../utils/constants";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withTopRatedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
@@ -10,6 +10,10 @@ const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredResList, setFilteredResList] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const TopRatedRestaurantCard = withTopRatedLabel(RestaurantCard);
+
+  console.log(restaurantList);
 
   // useEffect without dependency array => keep on calling useEffect whenever the component re-renders
   // useEffect with empty dependency array => initially calls useEffect
@@ -45,7 +49,7 @@ const Body = () => {
   }
 
   return (
-    <div className="body">
+    <div className="p-10">
       <div className="filter-container">
         <div className="search-container">
           <input
@@ -87,7 +91,11 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant.info} />
+            {restaurant.info.avgRating > 4.4 ? (
+              <TopRatedRestaurantCard resData={restaurant.info} />
+            ) : (
+              <RestaurantCard resData={restaurant.info} />
+            )}
           </Link>
         ))}
       </div>
