@@ -1,11 +1,8 @@
-import { useState } from "react";
 import ItemList from "./ItemList";
 
-const MenuCategoryAccordion = ({ data }) => {
-  const [showItems, setShowItems] = useState(false);
-
+const MenuCategoryAccordion = ({ data, showItems, setShowIndex }) => {
   const handleClick = () => {
-   setShowItems(!showItems)
+   setShowIndex()
   };
 
   return (
