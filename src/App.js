@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import Navbar from "./components/Navbar";
@@ -7,6 +7,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from "./utils/UserContext.jsx";
 // import Grocery from "./components/Grocery";
 
 // Jsx syntax -> not html but React.createElement which is converted by the transpiler(babel) in the bundler to React element(object) which is then converted to html by .render method
@@ -21,11 +22,26 @@ const Grocery = lazy(() => import("./components/Grocery"));
 // React Functional Component -> a function that return React elements(JSX)
 // Component Composition -> composing 2 components together
 const AppLayout = () => {
+  const [userName, setUserName] = useState("default");
+
+  // fetch api logic
+  useEffect(() => {
+    // data after authentication
+
+    const data = {
+      name: "Archit Anirudhan",
+    };
+
+    setUserName(data.name);
+  }, []);
+
   return (
-    <div className="app">
-      <Navbar />
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: userName }}>
+      <div className="app">
+        <Navbar />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 
