@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router";
 import { RES_API } from "../utils/constants";
 import RestaurantCard, { withTopRatedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext.jsx";
 
 const Body = () => {
   // Whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
@@ -13,6 +14,7 @@ const Body = () => {
 
   const TopRatedRestaurantCard = withTopRatedLabel(RestaurantCard);
 
+  const { setUserName, loggedInUser } = useContext(UserContext);
 
   // useEffect without dependency array => keep on calling useEffect whenever the component re-renders
   // useEffect with empty dependency array => initially calls useEffect
@@ -49,7 +51,7 @@ const Body = () => {
 
   return (
     <div className="p-10">
-      <div className="filter-container">
+      <div className="flex gap-5">
         <div className="search-container">
           <input
             type="text"
@@ -57,6 +59,7 @@ const Body = () => {
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
+            className="border border-black rounded-sm px-2"
           />
           <button
             onClick={() => {
@@ -66,12 +69,13 @@ const Body = () => {
                 )
               );
             }}
+            className="bg-amber-100 ml-2 px-2 "
           >
             Search
           </button>
         </div>
         <button
-          className="filter-btn"
+          className="bg-green-100 px-2"
           onClick={() => {
             const filtered = restaurantList.filter(
               (res) => res.info.avgRating > 4.3
@@ -83,6 +87,15 @@ const Body = () => {
         >
           Top rated
         </button>
+        <div>
+          <label>Username: </label>
+          <input
+            type="text"
+            className="border border-black rounded-sm px-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <div className="p-4 m-4 flex gap-4 flex-wrap">
         {filteredResList.map((restaurant) => (
