@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router";
+import UserContext from "../utils/UserContext";
 
 const Navbar = () => {
   const [btnName, setBtnName] = useState("Login");
+
+  const {loggedInUser} = useContext(UserContext)
+
   return (
     <div className="flex justify-between px-4 py-2 bg-blue-50 shadow-xl">
       <div className="logo-container">
@@ -31,6 +35,7 @@ const Navbar = () => {
         >
           {btnName}
         </button>
+        <p className="font-bold ">{loggedInUser}</p>
       </div>
     </div>
   );
