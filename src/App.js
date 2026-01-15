@@ -8,6 +8,8 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext.jsx";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore.js";
 // import Grocery from "./components/Grocery";
 
 // Jsx syntax -> not html but React.createElement which is converted by the transpiler(babel) in the bundler to React element(object) which is then converted to html by .render method
@@ -36,12 +38,14 @@ const AppLayout = () => {
   }, []);
 
   return (
+    <Provider store={appStore}>
     <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
       <div className="app">
         <Navbar />
         <Outlet />
       </div>
     </UserContext.Provider>
+    </Provider>
   );
 };
 
