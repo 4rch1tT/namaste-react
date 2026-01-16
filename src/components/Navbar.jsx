@@ -29,7 +29,9 @@ const Navbar = () => {
         <p>
           <Link to="/grocery">Grocery</Link>
         </p>
-        <p>Cart-{cartItems.length}</p>
+        <p>
+          <Link to="/cart">Cart-{cartItems.length}</Link>
+        </p>
         <button
           className="login"
           onClick={() => {

@@ -5,8 +5,8 @@ import { addToCart } from "../utils/cartSlice";
 const ItemList = ({ items }) => {
   const dispatch = useDispatch();
 
-  const handleAddToCart = () => {
-    dispatch(addToCart("mdma"));
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
   };
 
   return (
@@ -26,7 +26,7 @@ const ItemList = ({ items }) => {
           <div className="w-3/12">
             <button
               className="absolute bg-black text-gray-50 p-2 rounded-lg"
-              onClick={handleAddToCart}
+              onClick={() => handleAddToCart(item)}
             >
               ADD+
             </button>
